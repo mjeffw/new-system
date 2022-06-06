@@ -1,22 +1,31 @@
-const { rollup } = require('rollup');
-const argv = require('yargs').argv;
-const fs = require('fs-extra');
-const gulp = require('gulp');
-const path = require('path');
-const rollupConfig = require('./rollup.config');
-const sass = require('gulp-dart-sass');
+const { rollup } = require('rollup')
+const argv = require('yargs').argv
+const fs = require('fs-extra')
+const gulp = require('gulp')
+const path = require('path')
+const rollupConfig = require('./rollup.config')
+const sass = require('gulp-dart-sass')
 
 /********************/
 /*  CONFIGURATION   */
 /********************/
 
-const name = 'new-system';
-const sourceDirectory = './src';
-const distDirectory = './dist';
-const stylesDirectory = `${sourceDirectory}/styles`;
-const stylesExtension = 'scss';
-const sourceFileExtension = 'ts';
-const staticFiles = ['assets', 'fonts', 'lang', 'packs', 'templates', 'system.json', 'template.json'];
+const name = 'new-system'
+const sourceDirectory = './src'
+const distDirectory = './dist'
+const stylesDirectory = `${sourceDirectory}/styles`
+const stylesExtension = 'scss'
+const sourceFileExtension = 'ts'
+const staticFiles = [
+  'assets',
+  'fonts',
+  'lang',
+  'packs',
+  'templates',
+  'system.json',
+  'template.json',
+  './module/**/*.hbs',
+]
 
 /********************/
 /*      BUILD       */
@@ -26,8 +35,8 @@ const staticFiles = ['assets', 'fonts', 'lang', 'packs', 'templates', 'system.js
  * Build the distributable JavaScript code
  */
 async function buildCode() {
-  const build = await rollup({ input: rollupConfig.input, plugins: rollupConfig.plugins });
-  return build.write(rollupConfig.output);
+  const build = await rollup({ input: rollupConfig.input, plugins: rollupConfig.plugins })
+  return build.write(rollupConfig.output)
 }
 
 /**
@@ -37,7 +46,7 @@ function buildStyles() {
   return gulp
     .src(`${stylesDirectory}/${name}.${stylesExtension}`)
     .pipe(sass().on('error', sass.logError))
-    .pipe(gulp.dest(`${distDirectory}/styles`));
+    .pipe(gulp.dest(`${distDirectory}/styles`))
 }
 
 /**
@@ -46,7 +55,7 @@ function buildStyles() {
 async function copyFiles() {
   for (const file of staticFiles) {
     if (fs.existsSync(`${sourceDirectory}/${file}`)) {
-      await fs.copy(`${sourceDirectory}/${file}`, `${distDirectory}/${file}`);
+      await fs.copy(`${sourceDirectory}/${file}`, `${distDirectory}/${file}`)
     }
   }
 }
@@ -55,13 +64,13 @@ async function copyFiles() {
  * Watch for changes for each build step
  */
 function buildWatch() {
-  gulp.watch(`${sourceDirectory}/**/*.${sourceFileExtension}`, { ignoreInitial: false }, buildCode);
-  gulp.watch(`${stylesDirectory}/**/*.${stylesExtension}`, { ignoreInitial: false }, buildStyles);
+  gulp.watch(`${sourceDirectory}/**/*.${sourceFileExtension}`, { ignoreInitial: false }, buildCode)
+  gulp.watch(`${stylesDirectory}/**/*.${stylesExtension}`, { ignoreInitial: false }, buildStyles)
   gulp.watch(
-    staticFiles.map((file) => `${sourceDirectory}/${file}`),
+    staticFiles.map(file => `${sourceDirectory}/${file}`),
     { ignoreInitial: false },
-    copyFiles,
-  );
+    copyFiles
+  )
 }
 
 /********************/
@@ -72,17 +81,17 @@ function buildWatch() {
  * Remove built files from `dist` folder while ignoring source files
  */
 async function clean() {
-  const files = [...staticFiles, 'module'];
+  const files = [...staticFiles, 'module']
 
   if (fs.existsSync(`${stylesDirectory}/${name}.${stylesExtension}`)) {
-    files.push('styles');
+    files.push('styles')
   }
 
-  console.log(' ', 'Files to clean:');
-  console.log('   ', files.join('\n    '));
+  console.log(' ', 'Files to clean:')
+  console.log('   ', files.join('\n    '))
 
   for (const filePath of files) {
-    await fs.remove(`${distDirectory}/${filePath}`);
+    await fs.remove(`${distDirectory}/${filePath}`)
   }
 }
 
@@ -94,16 +103,16 @@ async function clean() {
  * Get the data path of Foundry VTT based on what is configured in `foundryconfig.json`
  */
 function getDataPath() {
-  const config = fs.readJSONSync('foundryconfig.json');
+  const config = fs.readJSONSync('foundryconfig.json')
 
   if (config?.dataPath) {
     if (!fs.existsSync(path.resolve(config.dataPath))) {
-      throw new Error('User Data path invalid, no Data directory found');
+      throw new Error('User Data path invalid, no Data directory found')
     }
 
-    return path.resolve(config.dataPath);
+    return path.resolve(config.dataPath)
   } else {
-    throw new Error('No User Data path defined in foundryconfig.json');
+    throw new Error('No User Data path defined in foundryconfig.json')
   }
 }
 
@@ -111,29 +120,29 @@ function getDataPath() {
  * Link build to User Data folder
  */
 async function linkUserData() {
-  let destinationDirectory;
+  let destinationDirectory
   if (fs.existsSync(path.resolve(sourceDirectory, 'system.json'))) {
-    destinationDirectory = 'systems';
+    destinationDirectory = 'systems'
   } else {
-    throw new Error('Could not find system.json');
+    throw new Error('Could not find system.json')
   }
 
-  const linkDirectory = path.resolve(getDataPath(), 'Data', destinationDirectory, name);
+  const linkDirectory = path.resolve(getDataPath(), 'Data', destinationDirectory, name)
 
   if (argv.clean || argv.c) {
-    console.log(`Removing build in ${linkDirectory}.`);
+    console.log(`Removing build in ${linkDirectory}.`)
 
-    await fs.remove(linkDirectory);
+    await fs.remove(linkDirectory)
   } else if (!fs.existsSync(linkDirectory)) {
-    console.log(`Linking dist to ${linkDirectory}.`);
-    await fs.ensureDir(path.resolve(linkDirectory, '..'));
-    await fs.symlink(path.resolve(distDirectory), linkDirectory);
+    console.log(`Linking dist to ${linkDirectory}.`)
+    await fs.ensureDir(path.resolve(linkDirectory, '..'))
+    await fs.symlink(path.resolve(distDirectory), linkDirectory)
   }
 }
 
-const execBuild = gulp.parallel(buildCode, buildStyles, copyFiles);
+const execBuild = gulp.parallel(buildCode, buildStyles, copyFiles)
 
-exports.build = gulp.series(clean, execBuild);
-exports.watch = buildWatch;
-exports.clean = clean;
-exports.link = linkUserData;
+exports.build = gulp.series(clean, execBuild)
+exports.watch = buildWatch
+exports.clean = clean
+exports.link = linkUserData

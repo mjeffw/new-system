@@ -3,14 +3,7 @@
   "title": "new-system",
   "description": "",
   "version": "This is auto replaced",
-  "author": "<your name>",
-  "authors": [
-    {
-      "name": "<your name>",
-      "email": "<optionally your e-mail address>",
-      "discord": "<optionally your discord username>"
-    }
-  ],
+  "author": "M. Jeff Wilson",
   "minimumCoreVersion": "9.238",
   "compatibleCoreVersion": "9",
   "scripts": [],
@@ -33,9 +26,9 @@
   "readme": "",
   "bugs": "",
   "changelog": "",
-  "initiative": "",
+  "initiative": "((@basicspeed.value*100) + (@attributes.DX.value / 100) + (1d6 / 1000)) / 100",
   "gridDistance": 1,
-  "gridUnits": "",
-  "primaryTokenAttribute": "",
-  "secondaryTokenAttribute": ""
+  "gridUnits": "yards",
+  "primaryTokenAttribute": "attributes.HP.value",
+  "secondaryTokenAttribute": "attributes.FP.value"
 }

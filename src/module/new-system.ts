@@ -11,33 +11,36 @@
  */
 
 // Import TypeScript modules
-import { registerSettings } from './settings';
-import { preloadTemplates } from './preloadTemplates';
+import { registerSettings } from './settings'
+import { preloadTemplates } from './preloadTemplates'
+import { GurpsCharacterSheet } from './actor/character/character-sheet'
 
 // Initialize system
 Hooks.once('init', async () => {
-  console.log('new-system | Initializing new-system');
+  console.log('new-system | Initializing new-system')
 
   // Assign custom classes and constants here
 
   // Register custom system settings
-  registerSettings();
+  registerSettings()
 
   // Preload Handlebars templates
-  await preloadTemplates();
+  await preloadTemplates()
 
   // Register custom sheets (if any)
-});
+  Actors.unregisterSheet('core', ActorSheet)
+  Actors.registerSheet('new-system', GurpsCharacterSheet, { makeDefault: true })
+})
 
 // Setup system
 Hooks.once('setup', async () => {
   // Do anything after initialization but before
   // ready
-});
+})
 
 // When ready
 Hooks.once('ready', async () => {
   // Do anything once the system is ready
-});
+})
 
 // Add any additional hooks if necessary

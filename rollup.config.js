@@ -1,5 +1,5 @@
-const typescript = require('rollup-plugin-typescript2');
-const { nodeResolve } = require('@rollup/plugin-node-resolve');
+const typescript = require('rollup-plugin-typescript2')
+const { nodeResolve } = require('@rollup/plugin-node-resolve')
 
 module.exports = {
   input: 'src/module/new-system.ts',
@@ -9,4 +9,4 @@ module.exports = {
     sourcemap: true,
   },
   plugins: [nodeResolve(), typescript({})],
-};
+}

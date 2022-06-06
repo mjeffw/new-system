@@ -1,22 +1,13 @@
 {
   "private": true,
   "name": "new-system",
-  "description": "",
-  "license": "",
-  "homepage": "",
+  "description": "An exploration into recreating gurps with a TypeScript project.",
+  "license": "MIT",
+  "homepage": "https://github.com/mjeffw/new-system",
   "repository": {
     "type": "git",
-    "url": ""
+    "url": "https://github.com/mjeffw/new-system"
   },
-  "bugs": {
-    "url": ""
-  },
-  "contributors": [
-    {
-      "name": "",
-      "email": ""
-    }
-  ],
   "scripts": {
     "build": "gulp build",
     "build:watch": "gulp watch",
@@ -29,7 +20,8 @@
     "test": "jest",
     "test:watch": "jest --watch",
     "test:ci": "jest --ci --reporters=default --reporters=jest-junit",
-    "postinstall": "husky install"
+    "postinstall": "husky install",
+    "prettier-format": "prettier --config .prettierrc.js '{src,test}/**/*.ts' --write"
   },
   "devDependencies": {
     "@league-of-foundry-developers/foundry-vtt-types": "^9.269.0",
@@ -59,5 +51,8 @@
   "lint-staged": {
     "*.(ts|js)": "eslint --fix",
     "*.(json|yml|scss)": "prettier --write"
+  },
+  "dependencies": {
+    "requirejs": "^2.3.6"
   }
 }
