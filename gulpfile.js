@@ -16,16 +16,9 @@ const distDirectory = './dist'
 const stylesDirectory = `${sourceDirectory}/styles`
 const stylesExtension = 'scss'
 const sourceFileExtension = 'ts'
-const staticFiles = [
-  'assets',
-  'fonts',
-  'lang',
-  'packs',
-  'templates',
-  'system.json',
-  'template.json',
-  './module/**/*.hbs',
-]
+const staticFiles = ['assets', 'fonts', 'lang', 'packs', 'templates', 'system.json', 'template.json']
+// Nick: Customizing for my template files
+const templateFiles = ['./src/**/*.hbs']
 
 /********************/
 /*      BUILD       */
@@ -58,6 +51,8 @@ async function copyFiles() {
       await fs.copy(`${sourceDirectory}/${file}`, `${distDirectory}/${file}`)
     }
   }
+  // Customizing for my template files
+  gulp.src(templateFiles, { base: './src' }).pipe(gulp.dest('dist'))
 }
 
 /**
