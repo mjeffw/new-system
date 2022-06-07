@@ -14,10 +14,14 @@
 import { registerSettings } from './settings'
 import { preloadTemplates } from './preloadTemplates'
 import { GurpsCharacterSheet } from './actor/character/character-sheet'
+import { Gurps2 } from './config'
 
 // Initialize system
 Hooks.once('init', async () => {
-  console.log('new-system | Initializing new-system')
+  window.gurps2 = Gurps2 // Make gurps global!
+
+  console.log(Gurps2.ASCII)
+  console.log(Gurps2.LEGAL)
 
   // Assign custom classes and constants here
 

@@ -2,7 +2,7 @@ const typescript = require('rollup-plugin-typescript2')
 const { nodeResolve } = require('@rollup/plugin-node-resolve')
 
 module.exports = {
-  input: 'src/module/new-system.ts',
+  input: 'src/module/gurps2.ts',
   output: {
     dir: 'dist/module',
     format: 'es',

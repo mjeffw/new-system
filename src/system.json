@@ -7,7 +7,7 @@
   "minimumCoreVersion": "9.238",
   "compatibleCoreVersion": "9",
   "scripts": [],
-  "esmodules": ["module/new-system.js"],
+  "esmodules": ["module/gurps2.js"],
   "styles": ["styles/new-system.css"],
   "packs": [],
   "dependencies": [],
