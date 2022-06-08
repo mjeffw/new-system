@@ -43,16 +43,18 @@
   --bgcolor-compactsheet: white;
   --color-accordion: white;
   --color-compactsheet: black;
+  --color-label: dimgrey;
   --fontfamily-std: 'Signika Negative', sans-serif;
   --fontfamily-icon: 'Font Awesome 5 Free', 'Signika Negative', sans-serif;
-  --fontsize-title: x-large;
-  --fontsize-detail: small;
+  --fontsize-title: large;
+  --fontsize-detail: smaller;
   --fontsize-compact-btn: smaller;
   --fontweight-label: lighter;
   --gap-std: 5px;
   --gap-small: 3px;
   --icon-plus: '\f067';
   --icon-minus: '\f068';
+  --transition-duration: 0.2s;
 }
 
 .compact-sheet {
@@ -68,6 +70,8 @@
   flex-flow: column nowrap;
   justify-content: center;
   align-items: flex-end;
+  color: var(--color-label);
+  white-space: nowrap;
 }
 
 .compact-sheet button {
@@ -83,6 +87,7 @@
   outline: none;
   padding: 0px;
   border-radius: 0px;
+  height: auto;
 }
 
 .compact-sheet input[type='text']:focus {
@@ -93,11 +98,16 @@
   padding: unset;
 }
 
+.compact-sheet textarea {
+  font-family: var(--fontfamily-std);
+}
+
 #character-header {
   display: grid;
-  grid-template-columns: 1fr max-content;
+  grid-template-columns: max-content 1fr;
   grid-template-rows: min-content min-content;
   gap: var(--gap-std);
+  height: unset;
 }
 
 #header-image {
@@ -106,11 +116,25 @@
   grid-row: span 3;
 }
 
-#header-image button {
-  margin-top: var(--gap-small);
-  line-height: unset;
+#header-image img {
+  background-color: lightgrey;
+  height: 92px;
+  width: 92px;
 }
 
+#header-image button {
+  margin: 0px;
+  margin-top: -1px;
+  line-height: unset;
+  border: 1px solid grey;
+  border-radius: 0px;
+}
+
+#header-data {
+  padding-bottom: var(--gap-std);
+}
+
+#header-detail-fields,
 #header-data {
   display: grid;
   grid-template-columns: 1fr max-content 1fr max-content 1fr max-content;
@@ -119,34 +143,35 @@
   font-size: var(--fontsize-detail);
 }
 
-#header-data input {
-  height: unset;
-}
-
 #header-data [name='name'] {
   grid-column: span 6;
   font-size: var(--fontsize-title);
 }
 
+#header-data-detail textarea {
+  grid-column: span 6;
+}
+
 /** Standard expandible/collapsible "tray" widget **/
 .gurps2 button.accordion {
-  grid-column: span 2;
+  grid-column: span 6;
   background-color: var(--bgcolor-accordion);
   color: var(--color-accordion);
   border: none;
   border-radius: 0;
   line-height: unset;
   text-align: left;
+  padding-top: 3px;
 }
 
-.gurps2 button.accordion::after {
+.gurps2 button.accordion:after {
   font-family: var(--fontfamily-icon);
   content: var(--icon-plus);
   float: right;
   font-weight: 900;
 }
 
-.gurps2 button.accordion.active::after {
+.gurps2 button.accordion.active:after {
   font-family: var(--fontfamily-icon);
   content: var(--icon-minus);
   float: right;
@@ -159,9 +184,9 @@
 }
 
 .gurps2 .accordion-content {
-  padding: 0 18px;
+  padding: 0 var(--gap-std);
   overflow: hidden;
   background-color: #f1f1f1;
   max-height: 0;
-  transition: max-height 0.2s ease-out;
+  transition: max-height var(--transition-duration) ease-out;
 }

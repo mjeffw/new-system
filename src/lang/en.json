@@ -9,6 +9,18 @@
         "age": "Age",
         "height": "Height",
         "weight": "Weight",
+        "title": "Title",
+        "birthday": "Birthday",
+        "religion": "Religion",
+        "eyes": "Eyes",
+        "hair": "Hair",
+        "hand": "Handedness",
+        "skin": "Skin",
+        "techlevel": "Tech Level",
+        "createdon": "Created On",
+        "modifiedon": "Modified On",
+        "player": "Player",
+        "appearance": "Appearance",
         "imageshare": "Share"
       }
     }
