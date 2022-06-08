@@ -2,3 +2,166 @@
 /*             Sass             */
 /* This is your Sass entry file */
 /* ---------------------------- */
+@font-face {
+  font-family: 'Modesto Condensed';
+  font-style: normal;
+  font-weight: 700;
+  src: url('/fonts/modesto-condensed/modesto-condensed-bold.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Signika Negative';
+  src: url('/fonts/signika-negative/signika-negative-light.woff2') format('woff2');
+  font-weight: 300;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Signika Negative';
+  src: url('/fonts/signika-negative/signika-negative-regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Signika Negative';
+  src: url('/fonts/signika-negative/signika-negative-semibold.woff2') format('woff2');
+  font-weight: 600;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Signika Negative';
+  src: url('/fonts/signika-negative/signika-negative-bold.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+}
+
+:root {
+  --bgcolor-accordion: dimgrey;
+  --bgcolor-accordion-active: #333;
+  --bgcolor-compactsheet: white;
+  --color-accordion: white;
+  --color-compactsheet: black;
+  --fontfamily-std: 'Signika Negative', sans-serif;
+  --fontfamily-icon: 'Font Awesome 5 Free', 'Signika Negative', sans-serif;
+  --fontsize-title: x-large;
+  --fontsize-detail: small;
+  --fontsize-compact-btn: smaller;
+  --fontweight-label: lighter;
+  --gap-std: 5px;
+  --gap-small: 3px;
+  --icon-plus: '\f067';
+  --icon-minus: '\f068';
+}
+
+.compact-sheet {
+  color: var(--color-compactsheet);
+  background-color: var(--bgcolor-compactsheet);
+  font-family: var(--fontfamily-std);
+  padding: var(--gap-std);
+}
+
+.compact-sheet label {
+  font-weight: var(--fontweight-label);
+  display: inline-flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: flex-end;
+}
+
+.compact-sheet button {
+  text-transform: capitalize;
+  font-size: var(--fontsize-compact-btn);
+}
+
+.compact-sheet input[type='text'] {
+  background-color: transparent;
+  border: none;
+  border: 1px solid transparent;
+  border-bottom: 1px solid grey;
+  outline: none;
+  padding: 0px;
+  border-radius: 0px;
+}
+
+.compact-sheet input[type='text']:focus {
+  border: 1px solid var(--color-border-light-tertiary);
+  border-radius: 3px;
+  background-color: unset;
+  outline: unset;
+  padding: unset;
+}
+
+#character-header {
+  display: grid;
+  grid-template-columns: 1fr max-content;
+  grid-template-rows: min-content min-content;
+  gap: var(--gap-std);
+}
+
+#header-image {
+  display: inline-flex;
+  flex-flow: column nowrap;
+  grid-row: span 3;
+}
+
+#header-image button {
+  margin-top: var(--gap-small);
+  line-height: unset;
+}
+
+#header-data {
+  display: grid;
+  grid-template-columns: 1fr max-content 1fr max-content 1fr max-content;
+  grid-template-rows: auto;
+  gap: var(--gap-small);
+  font-size: var(--fontsize-detail);
+}
+
+#header-data input {
+  height: unset;
+}
+
+#header-data [name='name'] {
+  grid-column: span 6;
+  font-size: var(--fontsize-title);
+}
+
+/** Standard expandible/collapsible "tray" widget **/
+.gurps2 button.accordion {
+  grid-column: span 2;
+  background-color: var(--bgcolor-accordion);
+  color: var(--color-accordion);
+  border: none;
+  border-radius: 0;
+  line-height: unset;
+  text-align: left;
+}
+
+.gurps2 button.accordion::after {
+  font-family: var(--fontfamily-icon);
+  content: var(--icon-plus);
+  float: right;
+  font-weight: 900;
+}
+
+.gurps2 button.accordion.active::after {
+  font-family: var(--fontfamily-icon);
+  content: var(--icon-minus);
+  float: right;
+  font-weight: 900;
+}
+
+.gurps2 button.accordion:hover,
+.gurps2 button.accordion.active {
+  background-color: var(--bgcolor-accordion-active);
+}
+
+.gurps2 .accordion-content {
+  padding: 0 18px;
+  overflow: hidden;
+  background-color: #f1f1f1;
+  max-height: 0;
+  transition: max-height 0.2s ease-out;
+}

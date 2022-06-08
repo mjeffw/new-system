@@ -1,34 +1,32 @@
-<form class='compact-sheet' autocomplete='off'>
-  <div class='character-header'>
-    <div class='header-data'>
+<form class='compact-sheet gurps2' autocomplete='off'>
+  <div id='character-header'>
+    <div id='header-data'>
       <input name='name' type='text' value='{{actor.name}}' placeholder='{{localize "gurps2.character.desc.name"}}' />
 
       <label for='gender'>{{localize 'gurps2.character.desc.gender'}}</label>
-      <input id='gender' name='data.desc.gender' type='text' value='{{data.desc.gender}}' />
-
-      <label for='race'>{{localize 'gurps2.character.desc.race'}}</label>
-      <input id='race' name='data.desc.race' type='text' value='{{data.desc.race}}' />
-
+      <input id='gender' name='data.desc.gender' type='text' value='{{data.data.desc.gender}}' />
       <label for='size'>{{localize 'gurps2.character.desc.size'}}</label>
       <input id='size' name='data.desc.size' type='text' value='{{data.desc.size}}' />
-
-      <label for='age'>{{localize 'gurps2.character.desc.age'}}</label>
-      <input id='age' name='data.desc.age' type='text' value='{{data.desc.age}}' />
-
       <label for='height'>{{localize 'gurps2.character.desc.height'}}</label>
       <input id='height' name='data.desc.height' type='text' value='{{data.desc.height}}' />
-
+      <label for='race'>{{localize 'gurps2.character.desc.race'}}</label>
+      <input id='race' name='data.desc.race' type='text' value='{{data.desc.race}}' />
+      <label for='age'>{{localize 'gurps2.character.desc.age'}}</label>
+      <input id='age' name='data.desc.age' type='text' value='{{data.desc.age}}' />
       <label for='weight'>{{localize 'gurps2.character.desc.weight'}}</label>
       <input id='weight' name='data.desc.weight' type='text' value='{{data.desc.weight}}' />
+
     </div>
-    <div class='header-image'>
-      <img src='{{actor.img}}' data-edit='img' title='{{actor.name}}' height='96' width='64' />
+    <div id='header-image'>
+      <img src='{{actor.img}}' data-edit='img' title='{{actor.name}}' height='96' width='96' />
       <button type='button'>{{localize 'gurps2.character.desc.imageshare'}}</button>
     </div>
-    <div class='header-data-detail'>
-      <!-- This is a list of key-value pairs that may be imported from GCS/GCA and/or managed by the user inside Forge -->
-
-      <textarea rows='4' name='data.desc.appearance'>{{data.desc.appearance}}</textarea>
+    <div id='header-data-detail'>
+      <button class='accordion'>Details</button>
+      <div class='accordion-content'>
+        <!-- This is a list of key-value pairs that may be imported from GCS/GCA and/or managed by the user inside Forge -->
+        <textarea rows='3' name='data.desc.appearance'>{{data.desc.appearance}}</textarea>
+      </div>
     </div>
   </div>
 </form>

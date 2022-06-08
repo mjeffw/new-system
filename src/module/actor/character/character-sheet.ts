@@ -15,4 +15,15 @@ export class GurpsCharacterSheet extends ActorSheet<ActorSheet.Options, GurpsCha
     data.config = window.gurps2
     return data
   }
+
+  override activateListeners(html: JQuery<HTMLElement>): void {
+    html.find('.accordion').on('click', function (ev) {
+      ev.preventDefault()
+      const element = ev.currentTarget
+      $(element).toggleClass('active')
+      const content = $(element).next('.accordion-content')
+      if (content.css('max-height') == '0px') content.css('max-height', '100px')
+      else content.css('max-height', '0px')
+    })
+  }
 }
