@@ -1,3 +1,16 @@
 {
-  "new-system": {}
+  "gurps2": {
+    "character": {
+      "desc": {
+        "name": "Name",
+        "gender": "Gender",
+        "race": "Race",
+        "size": "Size",
+        "age": "Age",
+        "height": "Height",
+        "weight": "Weight",
+        "imageshare": "Share"
+      }
+    }
+  }
 }

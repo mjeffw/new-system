@@ -8,6 +8,16 @@
     "templates": {}
   },
   "character": {
+    "desc": {
+      "gender": "",
+      "race": "",
+      "size": "+0",
+      "age": "",
+      "height": "",
+      "weight": "",
+      "appearance": "",
+      "details": []
+    },
     "attributes": {
       "HP": {
         "basic": 0,
