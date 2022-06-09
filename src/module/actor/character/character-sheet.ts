@@ -5,6 +5,8 @@ interface GurpsCharacterSheetData extends ActorSheet.Data {
   config?: typeof Gurps2
 }
 
+// To change the value of a CSS variable: document.documentElement.style.setProperty(`--${your-variable}`, value + suffix); //suffix may be px or ''
+
 export class GurpsCharacterSheet extends ActorSheet<ActorSheet.Options, GurpsCharacterSheetData> {
   override get template(): string {
     return `systems/new-system/module/actor/${this.actor.data.type}/${this.actor.data.type}-sheet.hbs`

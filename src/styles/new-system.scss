@@ -40,7 +40,8 @@
 :root {
   --bgcolor-accordion: dimgrey;
   --bgcolor-accordion-active: #333;
-  --bgcolor-compactsheet: white;
+  --bgcolor-accordion-content: rgba(0, 0, 0, 0.05);
+  --bgcolor-compactsheet: transparent;
   --color-accordion: white;
   --color-compactsheet: black;
   --color-label: dimgrey;
@@ -82,8 +83,8 @@
 .compact-sheet input[type='text'] {
   background-color: transparent;
   border: none;
-  border: 1px solid transparent;
-  border-bottom: 1px solid grey;
+  border: 1px hidden grey;
+  border-bottom: 1px dotted grey;
   outline: none;
   padding: 0px;
   border-radius: 0px;
@@ -146,10 +147,12 @@
 #header-data [name='name'] {
   grid-column: span 6;
   font-size: var(--fontsize-title);
+  padding-bottom: var(--gap-std);
 }
 
 #header-data-detail textarea {
   grid-column: span 6;
+  margin-bottom: 5px;
 }
 
 /** Standard expandible/collapsible "tray" widget **/
@@ -186,7 +189,8 @@
 .gurps2 .accordion-content {
   padding: 0 var(--gap-std);
   overflow: hidden;
-  background-color: #f1f1f1;
+  background-color: var(--bgcolor-accordion-content);
   max-height: 0;
   transition: max-height var(--transition-duration) ease-out;
+  border: 1px inset rgba(0, 0, 0, 0.1);
 }
