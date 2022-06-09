@@ -51,6 +51,9 @@ async function copyFiles() {
       await fs.copy(`${sourceDirectory}/${file}`, `${distDirectory}/${file}`)
     }
   }
+}
+
+async function copyTemplateFiles() {
   // Customizing for my template files
   gulp.src(templateFiles, { base: './src' }).pipe(gulp.dest('dist'))
 }
@@ -66,6 +69,7 @@ function buildWatch() {
     { ignoreInitial: false },
     copyFiles
   )
+  gulp.watch(templateFiles, { ignoreInitial: false }, copyTemplateFiles)
 }
 
 /********************/
