@@ -25,6 +25,8 @@ export class GurpsCharacterSheet extends ActorSheet<ActorSheet.Options, GurpsCha
   }
 
   override activateListeners(html: JQuery<HTMLElement>): void {
+    super.activateListeners(html)
+
     html.find('.accordion').on('click', function (ev) {
       ev.preventDefault()
       const element = $(ev.currentTarget)

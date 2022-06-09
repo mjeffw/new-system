@@ -42,15 +42,16 @@
   --bgcolor-accordion-active: #333;
   --bgcolor-accordion-content: rgba(0, 0, 0, 0.05);
   --bgcolor-compactsheet: transparent;
+  --borderradius-std: 3px;
   --color-accordion: white;
   --color-compactsheet: black;
   --color-label: dimgrey;
   --fontfamily-std: 'Signika Negative', sans-serif;
   --fontfamily-icon: 'Font Awesome 5 Free', 'Signika Negative', sans-serif;
-  --fontsize-title: large;
-  --fontsize-detail: smaller;
-  --fontsize-compact-btn: smaller;
-  --fontweight-label: lighter;
+  --fontsize-title: 150%;
+  --fontsize-detail: 80%;
+  --fontsize-compact-btn: 80%;
+  --fontweight-label: 100;
   --gap-std: 5px;
   --gap-small: 3px;
   --icon-plus: '\f067';
@@ -78,6 +79,7 @@
 .compact-sheet button {
   text-transform: capitalize;
   font-size: var(--fontsize-compact-btn);
+  border-radius: var(--borderradius-std);
 }
 
 .compact-sheet input[type='text'] {
@@ -121,6 +123,9 @@
   background-color: lightgrey;
   height: 92px;
   width: 92px;
+  border-radius: 0;
+  border-top-left-radius: var(--borderradius-std);
+  border-top-right-radius: var(--borderradius-std);
 }
 
 #header-image button {
@@ -128,7 +133,10 @@
   margin-top: -1px;
   line-height: unset;
   border: 1px solid grey;
-  border-radius: 0px;
+  border-top-left-radius: 0px;
+  border-top-right-radius: 0px;
+  border-bottom-left-radius: var(--borderradius-std);
+  border-bottom-right-radius: var(--borderradius-std);
 }
 
 #header-data {
@@ -160,11 +168,12 @@
   grid-column: span 6;
   background-color: var(--bgcolor-accordion);
   color: var(--color-accordion);
-  border: none;
-  border-radius: 0;
+  border: 1px solid var(--bgcolor-accordion);
+  border-radius: var(--borderradius-std);
   line-height: unset;
   text-align: left;
   padding-top: 3px;
+  margin: 0;
 }
 
 .gurps2 button.accordion:after {
@@ -186,6 +195,11 @@
   background-color: var(--bgcolor-accordion-active);
 }
 
+.gurps2 button.accordion.active {
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
 .gurps2 .accordion-content {
   padding: 0 var(--gap-std);
   overflow: hidden;
@@ -193,4 +207,6 @@
   max-height: 0;
   transition: max-height var(--transition-duration) ease-out;
   border: 1px inset rgba(0, 0, 0, 0.1);
+  border-bottom-left-radius: var(--borderradius-std);
+  border-bottom-right-radius: var(--borderradius-std);
 }
