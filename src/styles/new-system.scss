@@ -84,7 +84,6 @@
 
 .compact-sheet input[type='text'] {
   background-color: transparent;
-  border: none;
   border: 1px hidden grey;
   border-bottom: 1px dotted grey;
   outline: none;
@@ -103,6 +102,7 @@
 
 .compact-sheet textarea {
   font-family: var(--fontfamily-std);
+  font-size: inherit;
 }
 
 #character-header {
