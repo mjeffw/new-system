@@ -15,6 +15,7 @@ import { registerSettings } from './settings'
 import { preloadTemplates } from './preloadTemplates'
 import { GurpsCharacterSheet } from './actor/character/character-sheet'
 import { Gurps2 } from './config'
+import { GurpsCharacter } from './actor/character/character'
 
 // Initialize system
 Hooks.once('init', async () => {
@@ -30,6 +31,9 @@ Hooks.once('init', async () => {
 
   // Preload Handlebars templates
   await preloadTemplates()
+
+  // Register Actor classes
+  CONFIG.Actor.documentClass = GurpsCharacter
 
   // Register custom sheets (if any)
   Actors.unregisterSheet('core', ActorSheet)
