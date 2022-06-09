@@ -27,7 +27,10 @@
       "modifiedon": "",
       "player": "",
       "appearance": "",
-      "details": []
+      "settings": {
+        "visible": ["gender", "size", "height", "race", "age", "weight", "title", "techlevel", "player"],
+        "details": ["birthday", "religion", "eyes", "hair", "handedness", "skin", "createdon", "modifiedon"]
+      }
     },
     "attributes": {
       "HP": {
