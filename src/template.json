@@ -1,50 +1,49 @@
 {
   "Actor": {
     "types": ["character"],
-    "templates": {}
+    "character": {
+      "desc": {
+        "gender": "",
+        "race": "",
+        "size": "+0",
+        "age": "",
+        "height": "",
+        "weight": "",
+        "title": "",
+        "birthday": "",
+        "religion": "",
+        "eyes": "",
+        "hair": "",
+        "hand": "",
+        "skin": "",
+        "techlevel": "",
+        "createdon": "",
+        "modifiedon": "",
+        "player": "",
+        "appearance": "",
+        "settings": {
+          "visible": ["gender", "height", "race", "age", "weight", "title", "techlevel", "player"],
+          "details": ["birthday", "religion", "eyes", "hair", "handedness", "skin", "createdon", "modifiedon"]
+        }
+      },
+      "attributes": {
+        "HP": {
+          "basic": 0,
+          "value": 0,
+          "points": 0,
+          "dtype": "Number"
+        },
+        "FP": {
+          "basic": 0,
+          "value": 0,
+          "points": 0,
+          "dtype": "Number"
+        }
+      }
+    }
   },
   "Item": {
     "types": [],
     "templates": {}
-  },
-  "character": {
-    "desc": {
-      "gender": "",
-      "race": "",
-      "size": "+0",
-      "age": "",
-      "height": "",
-      "weight": "",
-      "title": "",
-      "birthday": "",
-      "religion": "",
-      "eyes": "",
-      "hair": "",
-      "hand": "",
-      "skin": "",
-      "techlevel": "",
-      "createdon": "",
-      "modifiedon": "",
-      "player": "",
-      "appearance": "",
-      "settings": {
-        "visible": ["gender", "size", "height", "race", "age", "weight", "title", "techlevel", "player"],
-        "details": ["birthday", "religion", "eyes", "hair", "handedness", "skin", "createdon", "modifiedon"]
-      }
-    },
-    "attributes": {
-      "HP": {
-        "basic": 0,
-        "value": 0,
-        "points": 0,
-        "dtype": "Number"
-      },
-      "FP": {
-        "basic": 0,
-        "value": 0,
-        "points": 0,
-        "dtype": "Number"
-      }
-    }
   }
 }

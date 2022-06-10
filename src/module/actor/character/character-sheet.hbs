@@ -8,7 +8,11 @@
     <div id='header-data'>
       <input name='name' type='text' value='{{actor.name}}' placeholder='{{localize "gurps2.character.desc.name"}}' />
 
-      <label for='gender'>{{localize 'gurps2.character.desc.gender'}}</label>
+      {{#each data.data.desc.settings.visible as |tag|}}
+        <label for='{{tag}}'>{{localize (concat 'gurps2.character.desc.' tag)}}</label>
+        <input id='{{tag}}' name='{{concat "data.desc." tag}}' type='text' value='{{lookup data.data.desc tag}}' />
+      {{/each}}
+      {{!-- <label for='gender'>{{localize 'gurps2.character.desc.gender'}}</label>
       <input id='gender' name='data.desc.gender' type='text' value='{{data.data.desc.gender}}' />
       <label for='size'>{{localize 'gurps2.character.desc.size'}}</label>
       <input id='size' name='data.desc.size' type='text' value='{{data.data.desc.size}}' />
@@ -25,37 +29,38 @@
       <label for='techlevel'>{{localize 'gurps2.character.desc.techlevel'}}</label>
       <input id='techlevel' name='data.desc.techlevel' type='text' value='{{data.data.desc.techlevel}}' />
       <label for='player'>{{localize 'gurps2.character.desc.player'}}</label>
-      <input id='player' name='data.desc.player' type='text' value='{{data.data.desc.player}}' />
+      <input id='player' name='data.desc.player' type='text' value='{{data.data.desc.player}}' /> --}}
     </div>
     <div id='header-data-detail'>
-      <button class='accordion'>Details</button>
-      <div id='header-detail-fields' class='accordion-content'>
-        <!-- This is a list of key-value pairs that may be imported from GCS/GCA and/or managed by the user inside Forge -->
-        <label for='birthday'>{{localize 'gurps2.character.desc.birthday'}}</label>
-        <input id='birthday' name='data.desc.birthday' type='text' value='{{data.data.desc.birthday}}' />
-        <label for='religion'>{{localize 'gurps2.character.desc.religion'}}</label>
-        <input id='religion' name='data.desc.religion' type='text' value='{{data.data.desc.religion}}' />
-        <label for='eyes'>{{localize 'gurps2.character.desc.eyes'}}</label>
-        <input id='eyes' name='data.desc.eyes' type='text' value='{{data.data.desc.eyes}}' />
-        <label for='hair'>{{localize 'gurps2.character.desc.hair'}}</label>
-        <input id='hair' name='data.desc.hair' type='text' value='{{data.data.desc.hair}}' />
-        <label for='hand'>{{localize 'gurps2.character.desc.hand'}}</label>
-        <input id='hand' name='data.desc.hand' type='text' value='{{data.data.desc.hand}}' />
-        <label for='skin'>{{localize 'gurps2.character.desc.skin'}}</label>
-        <input id='skin' name='data.desc.skin' type='text' value='{{data.data.desc.skin}}' />
-        <label for='createdon'>{{localize 'gurps2.character.desc.createdon'}}</label>
-        <input id='createdon' name='data.desc.createdon' type='text' value='{{data.data.desc.createdon}}' />
-        <label for='modifiedon'>{{localize 'gurps2.character.desc.modifiedon'}}</label>
-        <input id='modifiedon' name='data.desc.modifiedon' type='text' value='{{data.data.desc.modifiedon}}' />
+      {{#if displayFlags.descDetailsOpen}}
+        <button id='header-detail-accordion' class='accordion active'>Details</button>
+        <div id='header-detail-fields' class='accordion-content' style='max-height: 100%;'>
+      {{else}}
+        <button id='header-detail-accordion' class='accordion'>Details</button>
+        <div id='header-detail-fields' class='accordion-content' style='max-height: 0;'>
+      {{/if}}
+      <!-- This is a list of key-value pairs that may be imported from GCS/GCA and/or managed by the user inside Forge -->
+      <label for='birthday'>{{localize 'gurps2.character.desc.birthday'}}</label>
+      <input id='birthday' name='data.desc.birthday' type='text' value='{{data.data.desc.birthday}}' />
+      <label for='religion'>{{localize 'gurps2.character.desc.religion'}}</label>
+      <input id='religion' name='data.desc.religion' type='text' value='{{data.data.desc.religion}}' />
+      <label for='eyes'>{{localize 'gurps2.character.desc.eyes'}}</label>
+      <input id='eyes' name='data.desc.eyes' type='text' value='{{data.data.desc.eyes}}' />
+      <label for='hair'>{{localize 'gurps2.character.desc.hair'}}</label>
+      <input id='hair' name='data.desc.hair' type='text' value='{{data.data.desc.hair}}' />
+      <label for='hand'>{{localize 'gurps2.character.desc.hand'}}</label>
+      <input id='hand' name='data.desc.hand' type='text' value='{{data.data.desc.hand}}' />
+      <label for='skin'>{{localize 'gurps2.character.desc.skin'}}</label>
+      <input id='skin' name='data.desc.skin' type='text' value='{{data.data.desc.skin}}' />
+      <label for='createdon'>{{localize 'gurps2.character.desc.createdon'}}</label>
+      <input id='createdon' name='data.desc.createdon' type='text' value='{{data.data.desc.createdon}}' />
+      <label for='modifiedon'>{{localize 'gurps2.character.desc.modifiedon'}}</label>
+      <input id='modifiedon' name='data.desc.modifiedon' type='text' value='{{data.data.desc.modifiedon}}' />
 
-        <textarea
-          id='appearance'
-          rows='3'
-          name='data.desc.appearance'
-          placeholder='Appearance'
-        >{{data.data.desc.appearance}}</textarea>
-      </div>
+      <textarea id='appearance' rows='3' name='data.desc.appearance'
+        placeholder='{{localize "gurps2.character.desc.appearance"}}'>{{data.data.desc.appearance}}</textarea>
     </div>
+  </div>
   </div>
   <div>Another div</div>
 </form>
