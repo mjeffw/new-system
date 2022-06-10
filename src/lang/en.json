@@ -14,14 +14,15 @@
         "religion": "Religion",
         "eyes": "Eyes",
         "hair": "Hair",
-        "hand": "Handedness",
+        "handedness": "Handedness",
         "skin": "Skin",
         "techlevel": "Tech Level",
         "createdon": "Created On",
         "modifiedon": "Modified On",
         "player": "Player",
         "appearance": "Appearance",
-        "imageshare": "Share"
+        "imageshare": "Share",
+        "details": "Details"
       }
     }
   }

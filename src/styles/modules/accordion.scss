@@ -1,0 +1,47 @@
+/** Standard expandible/collapsible "tray" widget **/
+.gurps-ui button.accordion {
+  grid-column: span 6;
+  background-color: var(--bgcolor-accordion);
+  color: var(--color-accordion);
+  border: 1px solid var(--bgcolor-accordion);
+  border-radius: var(--borderradius-std);
+  line-height: unset;
+  text-align: left;
+  padding-top: 3px;
+  margin: 0;
+}
+
+.gurps-ui button.accordion:after {
+  font-family: var(--fontfamily-icon);
+  content: var(--icon-plus);
+  float: right;
+  font-weight: 900;
+}
+
+.gurps-ui button.accordion.active:after {
+  font-family: var(--fontfamily-icon);
+  content: var(--icon-minus);
+  float: right;
+  font-weight: 900;
+}
+
+.gurps-ui button.accordion:hover,
+.gurps-ui button.accordion.active {
+  background-color: var(--bgcolor-accordion-active);
+}
+
+.gurps-ui button.accordion.active {
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.gurps-ui .accordion-content {
+  padding: 0 var(--gap-std);
+  overflow: hidden;
+  background-color: var(--bgcolor-accordion-content);
+  max-height: 0;
+  transition: max-height var(--transition-duration) ease-out;
+  border: 1px inset rgba(0, 0, 0, 0.1);
+  border-bottom-left-radius: var(--borderradius-std);
+  border-bottom-right-radius: var(--borderradius-std);
+}

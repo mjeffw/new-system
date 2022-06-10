@@ -1,0 +1,26 @@
+:root {
+  --bgcolor-button: dimgrey;
+  --bgcolor-button-active: #333;
+  --bgcolor-accordion: var(--bgcolor-button);
+  --bgcolor-accordion-active: var(--bgcolor-button-active);
+  --bgcolor-accordion-content: rgba(0, 0, 0, 0.05);
+  --bgcolor-compactsheet: transparent;
+  --bgcolor-fab-button: var(--bgcolor-button);
+  --borderradius-std: 3px;
+  --boxshadow-std: 3px 3px 5px rgba(0, 0, 0, 0.2);
+  --color-accordion: white;
+  --color-compactsheet: black;
+  --color-label: dimgrey;
+  --color-fab-button: white;
+  --fontfamily-std: 'Signika Negative', sans-serif;
+  --fontfamily-icon: 'Font Awesome 5 Free', 'Signika Negative', sans-serif;
+  --fontsize-title: 150%;
+  --fontsize-detail: 80%;
+  --fontsize-compact-btn: 80%;
+  --fontweight-label: 100;
+  --gap-std: 5px;
+  --gap-small: 3px;
+  --icon-plus: '\f067';
+  --icon-minus: '\f068';
+  --transition-duration: 0.2s;
+}

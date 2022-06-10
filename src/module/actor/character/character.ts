@@ -4,5 +4,6 @@ import { ActorDataConstructorData } from '@league-of-foundry-developers/foundry-
 export class GurpsCharacter extends Actor {
   constructor(data?: ActorDataConstructorData, context?: Context<TokenDocument>) {
     super(data, context)
+    // Test
   }
 }

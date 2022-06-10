@@ -1,4 +1,6 @@
 import { Gurps2 } from '../../config'
+import { toggleBetweenStyles } from '../../helpers/jquery'
+import { CharacterHeaderEditor } from './apps/character-header-editor'
 
 interface GurpsCharacterSheetData extends ActorSheet.Data {
   displayFlags: DisplayFlags
@@ -42,9 +44,10 @@ export class GurpsCharacterSheet extends ActorSheet<ActorSheet.Options, GurpsCha
     super.activateListeners(html)
 
     html.find('.accordion').on('click', this._toggleAccordionDisplay.bind(this))
+    html.find('.actorsheet-control').on('click', this._handleActorSheetAction.bind(this, html))
   }
 
-  _toggleAccordionDisplay(ev: JQuery.ClickEvent) {
+  _toggleAccordionDisplay(ev: JQuery.ClickEvent): void {
     ev.preventDefault()
     const element = $(ev.currentTarget)
     this.displayFlags.descDetailsOpen = !element.hasClass('active')
@@ -52,19 +55,24 @@ export class GurpsCharacterSheet extends ActorSheet<ActorSheet.Options, GurpsCha
     const content = element.next('.accordion-content')
     toggleBetweenStyles(content, 'max-height', '0px', '100%')
   }
-}
 
-/**
- * JQuery HMTLElement method.
- *
- * If the specified style is currently set to 'choice1', set it to 'choice2'; otherwise set it to 'choice1'.
- *
- * @param element: JQuery<HTMLElement> to operate on.
- * @param style: the name of the style to modify
- * @param choice1: value1
- * @param choice2: value2
- */
-function toggleBetweenStyles(element: JQuery<HTMLElement>, style: string, choice1: string, choice2: string) {
-  if (element.css(style) == choice1) element.css(style, choice2)
-  else element.css(style, choice1)
+  _handleActorSheetAction(html: JQuery<HTMLElement>, ev: JQuery.ClickEvent): void {
+    ev.preventDefault()
+    const element = ev.currentTarget
+    const value = element.value ?? null
+    const action = element.dataset.action ?? null
+
+    if (ev.type == 'click') this._handleClickAction(action, value, html)
+  }
+
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  _handleClickAction(action: string | null, value: string | null, html: JQuery<HTMLElement>) {
+    switch (action) {
+      case 'edit-header':
+        {
+          new CharacterHeaderEditor(this.actor).render(true)
+        }
+        break
+    }
+  }
 }

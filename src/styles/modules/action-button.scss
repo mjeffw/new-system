@@ -1,0 +1,24 @@
+.fab-container {
+  position: relative;
+  bottom: 0px;
+  right: 0px;
+  cursor: pointer;
+}
+
+.iconbutton {
+  font-size: var(--fontsize-title);
+  width: 30px;
+  height: 30px;
+  border-radius: 100%;
+  color: var(--color-fab-button);
+  background: var(--bgcolor-button);
+  box-shadow: 3px 3px 5px #aaaaaa;
+  display: inline-flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: center;
+}
+
+.iconbutton:hover {
+  background-color: var(--bgcolor-button-active);
+}

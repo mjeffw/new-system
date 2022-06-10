@@ -2,71 +2,19 @@
 /*             Sass             */
 /* This is your Sass entry file */
 /* ---------------------------- */
-@font-face {
-  font-family: 'Modesto Condensed';
-  font-style: normal;
-  font-weight: 700;
-  src: url('/fonts/modesto-condensed/modesto-condensed-bold.woff2') format('woff2');
-}
+@use 'modules/variables.scss';
+@use 'modules/fonts.scss';
+@use 'modules/accordion.scss';
+@use 'modules/action-button.scss';
 
-@font-face {
-  font-family: 'Signika Negative';
-  src: url('/fonts/signika-negative/signika-negative-light.woff2') format('woff2');
-  font-weight: 300;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: 'Signika Negative';
-  src: url('/fonts/signika-negative/signika-negative-regular.woff2') format('woff2');
-  font-weight: 400;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: 'Signika Negative';
-  src: url('/fonts/signika-negative/signika-negative-semibold.woff2') format('woff2');
-  font-weight: 600;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: 'Signika Negative';
-  src: url('/fonts/signika-negative/signika-negative-bold.woff2') format('woff2');
-  font-weight: 700;
-  font-style: normal;
-}
-
-:root {
-  --bgcolor-accordion: dimgrey;
-  --bgcolor-accordion-active: #333;
-  --bgcolor-accordion-content: rgba(0, 0, 0, 0.05);
-  --bgcolor-compactsheet: transparent;
-  --borderradius-std: 3px;
-  --color-accordion: white;
-  --color-compactsheet: black;
-  --color-label: dimgrey;
-  --fontfamily-std: 'Signika Negative', sans-serif;
-  --fontfamily-icon: 'Font Awesome 5 Free', 'Signika Negative', sans-serif;
-  --fontsize-title: 150%;
-  --fontsize-detail: 80%;
-  --fontsize-compact-btn: 80%;
-  --fontweight-label: 100;
-  --gap-std: 5px;
-  --gap-small: 3px;
-  --icon-plus: '\f067';
-  --icon-minus: '\f068';
-  --transition-duration: 0.2s;
-}
-
-.compact-sheet {
+.gurps-ui {
   color: var(--color-compactsheet);
   background-color: var(--bgcolor-compactsheet);
   font-family: var(--fontfamily-std);
   padding: var(--gap-std);
 }
 
-.compact-sheet label {
+.gurps-ui label {
   font-weight: var(--fontweight-label);
   display: inline-flex;
   flex-flow: column nowrap;
@@ -76,13 +24,13 @@
   white-space: nowrap;
 }
 
-.compact-sheet button {
+.gurps-ui button {
   text-transform: uppercase;
   font-size: var(--fontsize-compact-btn);
   border-radius: var(--borderradius-std);
 }
 
-.compact-sheet input[type='text'] {
+.gurps-ui input[type='text'] {
   background-color: transparent;
   border: 1px hidden grey;
   border-bottom: 1px dotted grey;
@@ -92,7 +40,7 @@
   height: auto;
 }
 
-.compact-sheet input[type='text']:focus {
+.gurps-ui input[type='text']:focus {
   border: 1px solid var(--color-border-light-tertiary);
   border-radius: 3px;
   background-color: unset;
@@ -100,12 +48,12 @@
   padding: unset;
 }
 
-.compact-sheet textarea {
+.gurps-ui textarea {
   font-family: var(--fontfamily-std);
   font-size: inherit;
 }
 
-#character-header {
+.compact-sheet #character-header {
   display: grid;
   grid-template-columns: max-content 1fr;
   grid-template-rows: min-content min-content;
@@ -113,13 +61,13 @@
   height: unset;
 }
 
-#header-image {
+.gurps-ui #header-image {
   display: inline-flex;
   flex-flow: column nowrap;
   grid-row: span 3;
 }
 
-#header-image img {
+.gurps-ui #header-image img {
   background-color: lightgrey;
   height: 92px;
   width: 92px;
@@ -128,7 +76,7 @@
   border-top-right-radius: var(--borderradius-std);
 }
 
-#header-image button {
+.gurps-ui #header-image button {
   margin: 0px;
   margin-top: -1px;
   line-height: unset;
@@ -139,12 +87,12 @@
   border-bottom-right-radius: var(--borderradius-std);
 }
 
-#header-data {
+.compact-sheet #header-data {
   padding-bottom: var(--gap-std);
 }
 
-#header-detail-fields,
-#header-data {
+.compact-sheet #header-detail-fields,
+.compact-sheet #header-data {
   display: grid;
   grid-template-columns: 1fr max-content 1fr max-content 1fr max-content;
   grid-template-rows: auto;
@@ -152,61 +100,28 @@
   font-size: var(--fontsize-detail);
 }
 
-#header-data [name='name'] {
+.compact-sheet #header-data [name='name'] {
   grid-column: span 6;
   font-size: var(--fontsize-title);
   padding-bottom: var(--gap-std);
 }
 
-#header-data-detail textarea {
+.compact-sheet #appearance {
   grid-column: span 6;
-  margin-bottom: 5px;
+  margin-bottom: var(--gap-std);
+  display: inline-flex;
+  flex-flow: row nowrap;
+  gap: var(--gap-small);
+  align-items: center;
 }
 
-/** Standard expandible/collapsible "tray" widget **/
-.gurps2 button.accordion {
-  grid-column: span 6;
-  background-color: var(--bgcolor-accordion);
-  color: var(--color-accordion);
-  border: 1px solid var(--bgcolor-accordion);
-  border-radius: var(--borderradius-std);
-  line-height: unset;
-  text-align: left;
-  padding-top: 3px;
-  margin: 0;
+.compact-sheet #appearance textarea {
+  flex: 1;
 }
 
-.gurps2 button.accordion:after {
-  font-family: var(--fontfamily-icon);
-  content: var(--icon-plus);
-  float: right;
-  font-weight: 900;
-}
-
-.gurps2 button.accordion.active:after {
-  font-family: var(--fontfamily-icon);
-  content: var(--icon-minus);
-  float: right;
-  font-weight: 900;
-}
-
-.gurps2 button.accordion:hover,
-.gurps2 button.accordion.active {
-  background-color: var(--bgcolor-accordion-active);
-}
-
-.gurps2 button.accordion.active {
-  border-bottom-left-radius: 0;
-  border-bottom-right-radius: 0;
-}
-
-.gurps2 .accordion-content {
-  padding: 0 var(--gap-std);
-  overflow: hidden;
-  background-color: var(--bgcolor-accordion-content);
-  max-height: 0;
-  transition: max-height var(--transition-duration) ease-out;
-  border: 1px inset rgba(0, 0, 0, 0.1);
-  border-bottom-left-radius: var(--borderradius-std);
-  border-bottom-right-radius: var(--borderradius-std);
+.character-header-editor {
+  color: var(--color-compactsheet);
+  background-color: var(--bgcolor-compactsheet);
+  font-family: var(--fontfamily-std);
+  padding: var(--gap-std);
 }
