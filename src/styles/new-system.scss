@@ -119,9 +119,8 @@
   flex: 1;
 }
 
-.character-header-editor {
-  color: var(--color-compactsheet);
-  background-color: var(--bgcolor-compactsheet);
-  font-family: var(--fontfamily-std);
-  padding: var(--gap-std);
+.character-header-editor > div {
+  display: grid;
+  grid-template-columns: auto;
+  grid-template-rows: auto auto;
 }
