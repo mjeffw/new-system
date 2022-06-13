@@ -3,9 +3,9 @@
     <div id='data'>
       <div class='select'>
         {{#each allTags as |tag|}}
-          <label><input id='{{tag}}-editor' type='checkbox' value='{{tag}}' /><span>{{localize
-                (concat 'gurps2.character.desc.' tag)
-              }}</span></label>
+          <label><input id='{{tag}}-editor' type='checkbox' value='{{tag}}' />
+            <span>{{localize (concat 'gurps2.character.desc.' tag)}}</span>
+          </label>
         {{/each}}
       </div>
       <div class='controls'>
@@ -21,8 +21,12 @@
           <label>Visible</label>
           <ul id='visible-list' class='select'>
             {{#each visible as |tag|}}
-              <li><span class='text'>{{localize (concat 'gurps2.character.desc.' tag)}}</span><span class='close'>
-                  <i class='fas fa-times'></i></span></li>
+              <li>
+                <span class='text'>{{localize (concat 'gurps2.character.desc.' tag)}}</span>
+                <span class='close headereditor-control' data-action='delete' data-value='visible::{{@index}}'><i
+                    class='fas fa-times'
+                  ></i></span>
+              </li>
             {{/each}}
           </ul>
         </div>
@@ -30,8 +34,12 @@
           <label>Details</label>
           <ul id='details-list' class='select'>
             {{#each details as |tag|}}
-              <li><span class='text'>{{localize (concat 'gurps2.character.desc.' tag)}}</span><span class='close'>
-                  <i class='fas fa-times'></i></span></li>
+              <li>
+                <span class='text'>{{localize (concat 'gurps2.character.desc.' tag)}}</span>
+                <span class='close headereditor-control' data-action='delete' data-value='details::{{@index}}'><i
+                    class='fas fa-times'
+                  ></i></span>
+              </li>
             {{/each}}
           </ul>
         </div>
