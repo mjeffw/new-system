@@ -1,5 +1,5 @@
-describe('An example test', () => {
-  it('will always succeed', () => {
+describe('An example test', function () {
+  it('will always succeed', function () {
     expect(true).toBeTruthy()
   })
 })

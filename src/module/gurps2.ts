@@ -19,7 +19,7 @@ import { GurpsCharacter } from './actor/character/character'
 import registerHandlebarsHelpers from './handlebars-helpers'
 
 // Initialize system
-Hooks.once('init', async () => {
+Hooks.once('init', async function () {
   window.gurps2 = Gurps2 // Make gurps global!
 
   console.log(Gurps2.ASCII)
@@ -44,13 +44,13 @@ Hooks.once('init', async () => {
 })
 
 // Setup system
-Hooks.once('setup', async () => {
+Hooks.once('setup', async function () {
   // Do anything after initialization but before
   // ready
 })
 
 // When ready
-Hooks.once('ready', async () => {
+Hooks.once('ready', async function () {
   // Do anything once the system is ready
 })
 

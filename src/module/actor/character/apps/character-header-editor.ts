@@ -1,6 +1,8 @@
-import { GurpsCharacter } from '../character'
+import { GurpsCharacter, GurpsCharacterData } from '../character'
 
 interface CharacterHeaderEditorData extends ActorSheet.Data {
+  visible: string[]
+  details: string[]
   allTags: string[]
 }
 
@@ -9,8 +11,12 @@ export class CharacterHeaderEditor extends FormApplication<
   CharacterHeaderEditorData,
   GurpsCharacter
 > {
+  gurpsCharacter: GurpsCharacter
+
   constructor(actor: GurpsCharacter, options?: FormApplicationOptions) {
     super(actor, options)
+
+    this.gurpsCharacter = actor
   }
 
   override get template(): string {
@@ -40,6 +46,8 @@ export class CharacterHeaderEditor extends FormApplication<
       'modifiedon',
     ]
 
+    data.visible = (this.gurpsCharacter.data.data as GurpsCharacterData).desc.settings.visible
+    data.details = (this.gurpsCharacter.data.data as GurpsCharacterData).desc.settings.details
     return data
   }
 

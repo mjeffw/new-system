@@ -3,22 +3,24 @@ export default function registerHandlebarsHelpers(): void {
 }
 
 const helpers = {
-  htmlToPlainText: (input: string | null | undefined): string | null | undefined => {
+  htmlToPlainText: function (input: string | null | undefined): string | null | undefined {
     if (!input) return
     return $(input).text()
   },
 
-  isEmpty: (input: Array<unknown> | null | undefined): boolean => (input?.length ?? 0) === 0,
+  isEmpty: function (input: Array<unknown> | null | undefined): boolean {
+    return (input?.length ?? 0) === 0
+  },
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  concat: (...values: any[]): string => {
+  concat: function (...values: any[]): string {
     const options = values.pop()
     const join = options.hash?.join || ''
     return values.join(join)
   },
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  debug: (value: any): void => {
+  debug: function (value: any): void {
     console.log('Current context:')
     console.log('================')
     console.log(this)

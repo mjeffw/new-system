@@ -1,7 +1,59 @@
 <form class='character-header-editor gurps-ui' autocomplete='off'>
   <div>
     <div id='data'>
-      <div id="data"
+      <div class='select'>
+        {{#each allTags as |tag|}}
+          <label><input id='{{tag}}-editor' type='checkbox' value='{{tag}}' /><span>{{localize
+                (concat 'gurps2.character.desc.' tag)
+              }}</span></label>
+        {{/each}}
+      </div>
+      <div class='controls'>
+        <button id='visible-btn'>
+          Visible&emsp;<i class='fas fa-chevron-right'></i>
+        </button>
+        <button id='details-btn'>
+          Details&emsp;<i class='fas fa-chevron-right'></i>
+        </button>
+      </div>
+      <div class='lists'>
+        <div>
+          <label>Visible</label>
+          <ul id='visible-list' class='select'>
+            {{#each visible as |tag|}}
+              <li><span class='text'>{{localize (concat 'gurps2.character.desc.' tag)}}</span><span class='close'>
+                  <i class='fas fa-times'></i></span></li>
+            {{/each}}
+          </ul>
+        </div>
+        <div>
+          <label>Details</label>
+          <ul id='details-list' class='select'>
+            {{#each details as |tag|}}
+              <li><span class='text'>{{localize (concat 'gurps2.character.desc.' tag)}}</span><span class='close'>
+                  <i class='fas fa-times'></i></span></li>
+            {{/each}}
+          </ul>
+        </div>
+      </div>
+      <div class='examples'>
+        <div>
+          <label>Visible</label>
+          <div id='visible-example'>
+            {{#each visible as |tag|}}
+              <label>{{localize (concat 'gurps2.character.desc.' tag)}}</label>
+            {{/each}}
+          </div>
+        </div>
+        <div>
+          <label>Details</label>
+          <div id='details-example'>
+            {{#each details as |tag|}}
+              <label>{{localize (concat 'gurps2.character.desc.' tag)}}</label>
+            {{/each}}
+          </div>
+        </div>
+      </div>
     </div>
     <div id='buttonbar'></div>
   </div>
