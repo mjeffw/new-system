@@ -9,21 +9,21 @@
         {{/each}}
       </div>
       <div class='controls'>
-        <button id='visible-btn'>
-          Visible&emsp;<i class='fas fa-chevron-right'></i>
+        <button class='headereditor-control' data-action='visible::add'>
+          {{localize 'gurps2.character.desc.visible'}}&emsp;<i class='fas fa-chevron-right'></i>
         </button>
-        <button id='details-btn'>
-          Details&emsp;<i class='fas fa-chevron-right'></i>
+        <button class='headereditor-control' data-action='details::add'>
+          {{localize 'gurps2.character.desc.details'}}&emsp;<i class='fas fa-chevron-right'></i>
         </button>
       </div>
       <div class='lists'>
         <div>
-          <label>Visible</label>
+          <label>{{localize 'gurps2.character.desc.visible'}}</label>
           <ul id='visible-list' class='select'>
             {{#each visible as |tag|}}
               <li>
                 <span class='text'>{{localize (concat 'gurps2.character.desc.' tag)}}</span>
-                <span class='close headereditor-control' data-action='delete' data-value='visible::{{@index}}'><i
+                <span class='close headereditor-control' data-action='visible::delete' data-value='{{@index}}'><i
                     class='fas fa-times'
                   ></i></span>
               </li>
@@ -31,12 +31,12 @@
           </ul>
         </div>
         <div>
-          <label>Details</label>
+          <label>{{localize 'gurps2.character.desc.details'}}</label>
           <ul id='details-list' class='select'>
             {{#each details as |tag|}}
               <li>
                 <span class='text'>{{localize (concat 'gurps2.character.desc.' tag)}}</span>
-                <span class='close headereditor-control' data-action='delete' data-value='details::{{@index}}'><i
+                <span class='close headereditor-control' data-action='details::delete' data-value='{{@index}}'><i
                     class='fas fa-times'
                   ></i></span>
               </li>
@@ -46,7 +46,7 @@
       </div>
       <div class='examples'>
         <div>
-          <label>Visible</label>
+          <label>{{localize 'gurps2.character.desc.visible'}}</label>
           <div id='visible-example'>
             {{#each visible as |tag|}}
               <label>{{localize (concat 'gurps2.character.desc.' tag)}}</label>
@@ -54,7 +54,7 @@
           </div>
         </div>
         <div>
-          <label>Details</label>
+          <label>{{localize 'gurps2.character.desc.details'}}</label>
           <div id='details-example'>
             {{#each details as |tag|}}
               <label>{{localize (concat 'gurps2.character.desc.' tag)}}</label>

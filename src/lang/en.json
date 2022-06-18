@@ -22,7 +22,8 @@
         "player": "Player",
         "appearance": "Appearance",
         "imageshare": "Share",
-        "details": "Details"
+        "details": "Details",
+        "visible": "Visible"
       }
     }
   }

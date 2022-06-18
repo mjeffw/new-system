@@ -6,17 +6,13 @@ interface CharacterHeaderEditorData extends ActorSheet.Data {
   allTags: string[]
 }
 
-export class CharacterHeaderEditor extends FormApplication<
-  FormApplicationOptions,
-  CharacterHeaderEditorData,
-  GurpsCharacter
-> {
+export class CharacterHeaderEditor extends Application<ApplicationOptions> {
   gurpsCharacter: GurpsCharacter
   visible: string[]
   details: string[]
 
   constructor(actor: GurpsCharacter, options?: FormApplicationOptions) {
-    super(actor, options)
+    super(options)
 
     this.gurpsCharacter = actor
     this.visible = [...this.actorData.desc.settings.visible]
@@ -24,7 +20,7 @@ export class CharacterHeaderEditor extends FormApplication<
   }
 
   override get template(): string {
-    return `systems/new-system/module/actor/${this.object.data.type}/apps/${this.object.data.type}-header-editor.hbs`
+    return `systems/new-system/module/actor/character/apps/character-header-editor.hbs`
   }
 
   override getData(
@@ -76,16 +72,28 @@ export class CharacterHeaderEditor extends FormApplication<
 
   private _handleClickAction(action: string | null, value: string, html: JQuery<HTMLElement>) {
     switch (action) {
-      case 'delete':
-        const [list, index] = value?.split('::')
-        const theList = list == 'visible' ? this.visible : this.details
-        theList.splice(parseInt(index), 1)
-        this.render()
+      case 'visible::delete':
+        const index = parseInt(value)
+        this.visible.splice(index, 1)
+        this.render(true)
+        break
+
+      case 'details::add':
+        html.find('.select input[type="checkbox"]:checked').each((index, element) => {
+          const tag = (element as HTMLInputElement).value
+          if (tag) this.details.push(tag)
+        })
+        this.render(true)
+        break
+
+      case 'visible::add':
+        html.find('.select input[type="checkbox"]:checked').each((index, element) => {
+          const tag = (element as HTMLInputElement).value
+          if (tag) this.visible.push(tag)
+        })
+        this.render(true)
+        break
     }
     return
-  }
-
-  protected _updateObject(event: Event, formData?: object): Promise<unknown> {
-    throw new Error('Method not implemented.')
   }
 }
