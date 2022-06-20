@@ -9,8 +9,9 @@
       <input name='name' type='text' value='{{actor.name}}' placeholder='{{localize "gurps2.character.desc.name"}}' />
 
       {{#each data.data.desc.settings.visible as |tag|}}
+        {{debug ..}}
         <label for='{{tag}}'>{{localize (concat 'gurps2.character.desc.' tag)}}</label>
-        <input id='{{tag}}' name='{{concat "data.desc." tag}}' type='text' value='{{lookup data.data.desc tag}}' />
+        <input id='{{tag}}' name='{{concat "data.desc." tag}}' type='text' value='{{lookup ../data.data.desc tag}}' />
       {{/each}}
     </div>
     <div id='header-data-detail'>
@@ -25,7 +26,7 @@
       <!-- This is a list of key-value pairs that may be imported from GCS/GCA and/or managed by the user inside Forge -->
       {{#each data.data.desc.settings.details as |tag|}}
         <label for='{{tag}}'>{{localize (concat 'gurps2.character.desc.' tag)}}</label>
-        <input id='{{tag}}' name='{{concat "data.desc." tag}}' type='text' value='{{lookup data.data.desc tag}}' />
+        <input id='{{tag}}' name='{{concat "data.desc." tag}}' type='text' value='{{lookup ../data.data.desc tag}}' />
       {{/each}}
       <div id='appearance'>
         <textarea id='appearance' rows='3' name='data.desc.appearance'

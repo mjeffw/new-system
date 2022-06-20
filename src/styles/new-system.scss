@@ -257,3 +257,16 @@
   margin-top: var(--gap-std);
   align-items: flex-start;
 }
+
+.character-header-editor #visible-list li.gurps-drop-hint,
+.character-header-editor #details-list li.gurps-drop-hint {
+  border: 1px solid red;
+  background: rgba(255, 255, 255, 0.4);
+}
+
+.character-header-editor #visible-list li.gurps-dnd-active,
+.character-header-editor #details-list li.gurps-dnd-active {
+  border: 1px solid red;
+  box-shadow: 0px 0px 5px red;
+  background: lightpink;
+}

@@ -1,3 +1,4 @@
+import { _validateChatMessageType } from '@league-of-foundry-developers/foundry-vtt-types/src/foundry/common/data/data.mjs/chatMessageData'
 import { GurpsCharacter, GurpsCharacterData } from '../character'
 
 interface CharacterHeaderEditorData extends ActorSheet.Data {
@@ -10,6 +11,7 @@ export class CharacterHeaderEditor extends Application<ApplicationOptions> {
   gurpsCharacter: GurpsCharacter
   visible: string[]
   details: string[]
+  current: null | HTMLElement = null
 
   constructor(actor: GurpsCharacter, options?: FormApplicationOptions) {
     super(options)
@@ -59,6 +61,58 @@ export class CharacterHeaderEditor extends Application<ApplicationOptions> {
     super.activateListeners(html)
 
     html.find('.headereditor-control').on('click', this.handleControlEvent.bind(this, html))
+
+    // make the list elements 'draggable'
+    const draggableItems = html.find('#visible-list li, #details-list li')
+    this.makeDragAndDropSortable(draggableItems)
+  }
+
+  private makeDragAndDropSortable(draggableItems: JQuery<HTMLElement>) {
+    draggableItems.attr('draggable', 'true')
+
+    // on drag-start, save element as current and highlight drop zones
+    const dropHint = 'gurps-drop-hint'
+    draggableItems.on('dragstart', ev => {
+      this.current = ev.currentTarget
+      for (const item of draggableItems) if (item != ev.currentTarget) item.classList.add(dropHint)
+    })
+
+    // on dragenter, highlight the item
+    const dropHighlight = 'gurps-dnd-active'
+    draggableItems.on('dragover', ev => {
+      ev.preventDefault()
+      if (ev.currentTarget != this.current) ev.currentTarget.classList.add(dropHighlight)
+    })
+
+    // on drag-leave, remove highlight
+    draggableItems.on('dragleave', ev => ev.currentTarget.classList.remove(dropHighlight))
+
+    // on drag-end
+    draggableItems.on('dragend', () => {
+      for (const item of draggableItems) {
+        item.classList.remove(dropHint)
+        item.classList.remove(dropHighlight)
+      }
+    })
+
+    draggableItems.on('drop', ev => {
+      ev.preventDefault()
+      const element = ev.currentTarget
+      if (element.parentNode && this.current && ev.currentTarget != this.current) {
+        let currentPosition = 0
+        let droppedPosition = 0
+        for (let index = 0; index < draggableItems.length; index++) {
+          if (this.current == draggableItems[index]) currentPosition = index
+          if (ev.currentTarget == draggableItems[index]) droppedPosition = index
+        }
+
+        if (currentPosition < droppedPosition) {
+          element.parentNode.insertBefore(this.current, element.nextSibling)
+        } else {
+          element.parentNode.insertBefore(this.current, element)
+        }
+      }
+    })
   }
 
   handleControlEvent(html: JQuery<HTMLElement>, ev: JQuery.ClickEvent) {
@@ -73,9 +127,19 @@ export class CharacterHeaderEditor extends Application<ApplicationOptions> {
   private _handleClickAction(action: string | null, value: string, html: JQuery<HTMLElement>) {
     switch (action) {
       case 'visible::delete':
-        const index = parseInt(value)
-        this.visible.splice(index, 1)
-        this.render(true)
+        {
+          const index = parseInt(value)
+          this.visible.splice(index, 1)
+          this.render(true)
+        }
+        break
+
+      case 'details::delete':
+        {
+          const index = parseInt(value)
+          this.details.splice(index, 1)
+          this.render(true)
+        }
         break
 
       case 'details::add':
