@@ -1,4 +1,4 @@
-import { _validateChatMessageType } from '@league-of-foundry-developers/foundry-vtt-types/src/foundry/common/data/data.mjs/chatMessageData'
+import { getUserData } from '../../../helpers/jquery'
 import { GurpsCharacter, GurpsCharacterData } from '../character'
 
 interface CharacterHeaderEditorData extends ActorSheet.Data {
@@ -11,7 +11,7 @@ export class CharacterHeaderEditor extends Application<ApplicationOptions> {
   gurpsCharacter: GurpsCharacter
   visible: string[]
   details: string[]
-  current: null | HTMLElement = null
+  dragElement: null | HTMLElement = null
 
   constructor(actor: GurpsCharacter, options?: FormApplicationOptions) {
     super(options)
@@ -73,15 +73,17 @@ export class CharacterHeaderEditor extends Application<ApplicationOptions> {
     // on drag-start, save element as current and highlight drop zones
     const dropHint = 'gurps-drop-hint'
     draggableItems.on('dragstart', ev => {
-      this.current = ev.currentTarget
-      for (const item of draggableItems) if (item != ev.currentTarget) item.classList.add(dropHint)
+      this.dragElement = ev.currentTarget
+      draggableItems.each((_, item) => {
+        if (item != ev.currentTarget) item.classList.add(dropHint)
+      })
     })
 
     // on dragenter, highlight the item
     const dropHighlight = 'gurps-dnd-active'
-    draggableItems.on('dragover', ev => {
+    draggableItems.on('dragenter, dragover', ev => {
       ev.preventDefault()
-      if (ev.currentTarget != this.current) ev.currentTarget.classList.add(dropHighlight)
+      if (ev.currentTarget != this.dragElement) ev.currentTarget.classList.add(dropHighlight)
     })
 
     // on drag-leave, remove highlight
@@ -89,28 +91,34 @@ export class CharacterHeaderEditor extends Application<ApplicationOptions> {
 
     // on drag-end
     draggableItems.on('dragend', () => {
-      for (const item of draggableItems) {
+      draggableItems.each((_, item) => {
         item.classList.remove(dropHint)
         item.classList.remove(dropHighlight)
-      }
+      })
     })
 
     draggableItems.on('drop', ev => {
       ev.preventDefault()
-      const element = ev.currentTarget
-      if (element.parentNode && this.current && ev.currentTarget != this.current) {
-        let currentPosition = 0
-        let droppedPosition = 0
-        for (let index = 0; index < draggableItems.length; index++) {
-          if (this.current == draggableItems[index]) currentPosition = index
-          if (ev.currentTarget == draggableItems[index]) droppedPosition = index
-        }
+      const dropTarget = ev.currentTarget
 
-        if (currentPosition < droppedPosition) {
-          element.parentNode.insertBefore(this.current, element.nextSibling)
-        } else {
-          element.parentNode.insertBefore(this.current, element)
-        }
+      if (this.dragElement && dropTarget && dropTarget != this.dragElement) {
+        const dropTargetData = getUserData(dropTarget, 'span.headereditor-control')
+        const targetIndex = parseInt(dropTargetData.value ?? '0') // value is index
+        const targetList = (dropTargetData.action ?? '').split('::')[0] // action includes list, like 'details::delete'
+
+        const dragElementData = getUserData(this.dragElement, 'span.headereditor-control')
+        const sourceIndex = parseInt(dragElementData.value ?? '0') // value is index
+        const sourceList = (dragElementData.action ?? '').split('::')[0] // action includes list, like 'details::delete'
+
+        // remove the element from source
+        let list = sourceList == 'visible' ? this.visible : this.details
+        const tag = list.splice(sourceIndex, 1)[0]
+
+        // add it to the target
+        list = targetList == 'visible' ? this.visible : this.details
+        list.splice(targetIndex, 0, tag)
+
+        this.render(true)
       }
     })
   }
@@ -124,7 +132,7 @@ export class CharacterHeaderEditor extends Application<ApplicationOptions> {
     if (ev.type == 'click') this._handleClickAction(action, value, html)
   }
 
-  private _handleClickAction(action: string | null, value: string, html: JQuery<HTMLElement>) {
+  private async _handleClickAction(action: string | null, value: string, html: JQuery<HTMLElement>) {
     switch (action) {
       case 'visible::delete':
         {
@@ -143,19 +151,36 @@ export class CharacterHeaderEditor extends Application<ApplicationOptions> {
         break
 
       case 'details::add':
-        html.find('.select input[type="checkbox"]:checked').each((index, element) => {
-          const tag = (element as HTMLInputElement).value
-          if (tag) this.details.push(tag)
-        })
-        this.render(true)
+        {
+          html.find('.select input[type="checkbox"]:checked').each((index, element) => {
+            const tag = (element as HTMLInputElement).value
+            if (tag) this.details.push(tag)
+          })
+          this.render(true)
+        }
         break
 
       case 'visible::add':
-        html.find('.select input[type="checkbox"]:checked').each((index, element) => {
-          const tag = (element as HTMLInputElement).value
-          if (tag) this.visible.push(tag)
-        })
-        this.render(true)
+        {
+          html.find('.select input[type="checkbox"]:checked').each((index, element) => {
+            const tag = (element as HTMLInputElement).value
+            if (tag) this.visible.push(tag)
+          })
+          this.render(true)
+        }
+        break
+
+      case 'cancel':
+        this.close()
+        break
+
+      case 'submit':
+        {
+          await this.gurpsCharacter.update({
+            data: { desc: { settings: { visible: this.visible, details: this.details } } },
+          })
+          this.close()
+        }
         break
     }
     return

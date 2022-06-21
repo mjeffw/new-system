@@ -1,5 +1,9 @@
 {
   "gurps2": {
+    "misc": {
+      "submit": "Submit",
+      "cancel": "Cancel"
+    },
     "character": {
       "desc": {
         "name": "Name",

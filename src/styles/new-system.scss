@@ -2,6 +2,7 @@
 /*             Sass             */
 /* This is your Sass entry file */
 /* ---------------------------- */
+
 @use 'modules/variables.scss';
 @use 'modules/fonts.scss';
 @use 'modules/accordion.scss';
@@ -11,7 +12,7 @@
   color: var(--color-compactsheet);
   background-color: var(--bgcolor-compactsheet);
   font-family: var(--fontfamily-std);
-  padding: var(--gap-std);
+  padding: var(--gap-small);
 }
 
 .gurps-ui label {
@@ -29,11 +30,18 @@
   font-size: var(--fontsize-compact-btn);
   border-radius: var(--borderradius-std);
   white-space: nowrap;
+  color: var(--color-primary-1);
+  background-color: var(--color-complement-1);
+  border: 2px groove var(--color-complement-1);
+}
+
+.gurps-ui button:hover {
+  background-color: var(--color-complement-2);
 }
 
 .gurps-ui input[type='text'] {
   background-color: transparent;
-  border: 1px hidden grey;
+  border: 1px solid transparent;
   border-bottom: 1px dotted grey;
   outline: none;
   padding: 0px;
@@ -47,6 +55,11 @@
   background-color: unset;
   outline: unset;
   padding: unset;
+}
+
+::selection {
+  background: var(--color-primary-4);
+  color: black;
 }
 
 .gurps-ui textarea {
@@ -75,6 +88,10 @@
   border-radius: 0;
   border-top-left-radius: var(--borderradius-std);
   border-top-right-radius: var(--borderradius-std);
+}
+
+.gurps-ui #header-image img:hover {
+  box-shadow: 0 0 5px var(--color-shadow-primary);
 }
 
 .gurps-ui #header-image button {
@@ -150,6 +167,10 @@
   border-radius: var(--borderradius-std);
   background-color: var(--bgcolor-accordion-content);
   box-shadow: 1px 1px 3px grey inset;
+}
+
+.character-header-editor .select:hover {
+  box-shadow: 0 0 5px var(--color-shadow-primary);
 }
 
 .character-header-editor .select label {
@@ -260,13 +281,23 @@
 
 .character-header-editor #visible-list li.gurps-drop-hint,
 .character-header-editor #details-list li.gurps-drop-hint {
-  border: 1px solid red;
+  border: 1px solid darkred;
   background: rgba(255, 255, 255, 0.4);
 }
 
 .character-header-editor #visible-list li.gurps-dnd-active,
 .character-header-editor #details-list li.gurps-dnd-active {
-  border: 1px solid red;
-  box-shadow: 0px 0px 5px red;
-  background: lightpink;
+  position: relative;
+}
+
+.character-header-editor #visible-list li.gurps-dnd-active:before,
+.character-header-editor #details-list li.gurps-dnd-active:before {
+  content: ' ';
+  position: absolute;
+  top: -3px;
+  left: -1px;
+  right: -1px;
+  border-top: 2px solid darkred;
+  border-radius: 0;
+  padding-top: 6px;
 }

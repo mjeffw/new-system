@@ -1,17 +1,45 @@
 :root {
-  --bgcolor-button: dimgrey;
-  --bgcolor-button-active: #333;
-  --bgcolor-accordion: var(--bgcolor-button);
-  --bgcolor-accordion-active: var(--bgcolor-button-active);
-  --bgcolor-accordion-content: rgba(0, 0, 0, 0.05);
-  --bgcolor-compactsheet: transparent;
-  --bgcolor-fab-button: var(--bgcolor-button);
+  --color-primary-0: #ffca58; // Main Primary color */
+  --color-primary-1: #fffbf3;
+  --color-primary-2: #ffdf9a;
+  --color-primary-3: #ffb619;
+  --color-primary-4: #ffae00;
+
+  --color-secondary-1-0: #7d8141; // Main Secondary color (1) */
+  --color-secondary-1-1: #161612;
+  --color-secondary-1-2: #454630;
+  --color-secondary-1-3: #b4bc39;
+  --color-secondary-1-4: #eefc15;
+
+  --color-secondary-2-0: #bc60dc; // Main Secondary color (2) */
+  --color-secondary-2-1: #eeebef;
+  --color-secondary-2-2: #d5a2e7;
+  --color-secondary-2-3: #b12ce0;
+  --color-secondary-2-4: #b503f4;
+
+  --color-complement-0: #2345a9; // Main Complement color */
+  --color-complement-1: #6985d8;
+  --color-complement-2: #4261bd;
+  --color-complement-3: #152f7f;
+  --color-complement-4: #091c53;
+
+  --color-shadow-primary: var(--color-secondary-2-4);
+  --bgcolor-button: var(--color-complement-1);
+  --bgcolor-button-active: var(--color-complement-2);
+  --bgcolor-accordion: var(--color-complement-1);
+  --bgcolor-accordion-active: var(--color-complement-2);
+  --bgcolor-accordion-content: rgba(0, 0, 0, 0.03);
+
+  --bgcolor-compactsheet: var(--color-primary-1);
+  --bgcolor-fab-button: var(--color-complement-1);
+  --color-accordion: var(--color-primary-1);
+  --color-compactsheet: var(--color-secondary-1-1);
+  --color-label: var(--color-secondary-1-2);
+  --color-fab-button: var(--color-primary-1);
+
   --borderradius-std: 3px;
   --boxshadow-std: 3px 3px 5px rgba(0, 0, 0, 0.2);
-  --color-accordion: white;
-  --color-compactsheet: black;
-  --color-label: dimgrey;
-  --color-fab-button: white;
+
   --fontfamily-std: 'Signika Negative', sans-serif;
   --fontfamily-icon: 'Font Awesome 5 Free', 'Signika Negative', sans-serif;
   --fontsize-title: 150%;

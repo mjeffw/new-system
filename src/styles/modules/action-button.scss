@@ -21,4 +21,5 @@
 
 .iconbutton:hover {
   background-color: var(--bgcolor-button-active);
+  box-shadow: 0 0 5px var(--color-shadow-primary);
 }
